@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="LabAITechr - Automating Pathology Labs with AI. Smart Lab Report Analyzer to detect abnormal CBC values automatically.">
+    <title>LabAITechr | AI-Powered Pathology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+    
+    <nav class="navbar">
+        <div class="container nav-container">
+            <div class="logo">Lab<span>AI</span>Techr</div>
+            <ul class="nav-links">
+                <li><a href="#about">About</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#contact" class="btn-primary">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="container hero-content reveal">
+            <div class="badge">Next-Gen Pathology</div>
+            <h1 class="hero-title">Automating Pathology<br>with <span class="text-gradient">Artificial Intelligence</span></h1>
+            <p class="hero-subtitle">We build smart Python scripts and AI tools that instantly parse raw blood test reports to eliminate manual fatigue and accelerate clinical verification.</p>
+            <div class="hero-buttons">
+                <a href="#features" class="btn-primary btn-large">Explore Features</a>
+                <a href="https://github.com/archraj46/Smart-LabReport-Analyzer" target="_blank" class="btn-secondary btn-large">View on GitHub</a>
+            </div>
+        </div>
+        <div class="hero-image reveal delay-1">
+            <div class="glass-card mockup-card">
+                <div class="mockup-header">
+                    <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                    <span class="mockup-title">analyzer.py</span>
+                </div>
+                <div class="mockup-body">
+                    <pre><code><span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">from</span> kiro_ai <span class="keyword">import</span> ReportAnalyzer
+
+<span class="comment"># Load raw CBC data</span>
+data = pd.read_csv(<span class="string">'patient_report.csv'</span>)
+
+<span class="comment"># Analyze and flag abnormal values</span>
+analyzer = ReportAnalyzer(model=<span class="string">'kiro-pro-plus'</span>)
+results = analyzer.scan(data)
+
+<span class="keyword">print</span>(results.flagged_abnormalities)
+<span class="output">> [CRITICAL] Hemoglobin: 8.2 g/dL (Low)</span>
+<span class="output">> [WARNING] WBC Count: 12,000 /mcL (High)</span></code></pre>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">The Problem We're Fixing</h2>
+                <p class="section-desc">Lab technicians spend hours manually verifying hundreds of data points every single day. It's slow, tiring, and prone to human error.</p>
+            </div>
+            <div class="about-grid">
+                <div class="glass-card about-card reveal">
+                    <div class="icon">🔬</div>
+                    <h3>Built by Medical Pros</h3>
+                    <p>We are pathology experts who understand the daily grind of diagnostic labs. We build tools that actually solve real clinical problems.</p>
+                </div>
+                <div class="glass-card about-card reveal delay-1">
+                    <div class="icon">⚡</div>
+                    <h3>Powered by AI</h3>
+                    <p>Leveraging Kiro Pro+ and advanced language models to accurately parse, understand, and categorize complex medical CSV data in seconds.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="section bg-dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Smart Lab Report Analyzer</h2>
+                <p class="section-desc">Our flagship open-source tool designed to make result verification effortless.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-item reveal">
+                    <div class="feature-content">
+                        <h3>Automatic Abnormal Flagging</h3>
+                        <p>Reads raw CBC data and instantly highlights values outside the standard medical reference ranges, catching critical issues immediately.</p>
+                    </div>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-content">
+                        <h3>Zero-Click Data Entry</h3>
+                        <p>Eliminate typos and transcription errors. Our scripts ingest raw machine outputs directly, ensuring 100% data integrity.</p>
+                    </div>
+                </div>
+                <div class="feature-item reveal">
+                    <div class="feature-content">
+                        <h3>Lightning Fast Verification</h3>
+                        <p>What used to take 5 minutes per patient report now takes milliseconds, allowing labs to process higher volumes without fatigue.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section cta-section">
+        <div class="container reveal">
+            <div class="glass-card cta-card">
+                <h2>Ready to Modernize Your Lab?</h2>
+                <p>We are actively looking for partner clinics to beta test our cloud-based AI solutions.</p>
+                <a href="mailto:founder@labaitechr.online" class="btn-primary btn-large">Email Us: founder@labaitechr.online</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Lab<span>AI</span>Techr</div>
+            <p>&copy; 2026 LabAITechr. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
