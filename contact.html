@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | LabAITechr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none; color:inherit;">Lab<span>AI</span>Techr</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="contact.html" class="active" style="color:var(--text-primary);">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-header section">
+        <div class="container reveal">
+            <div class="badge">Partner With Us</div>
+            <h1 class="hero-title">Let's Connect and <br><span class="text-gradient">Innovate</span></h1>
+            <p class="section-desc">Have a question or want to beta test our AI tools in your lab? Drop us a message.</p>
+        </div>
+    </div>
+
+    <section class="section bg-dark">
+        <div class="container">
+            <div class="contact-grid">
+                <div class="glass-card contact-info reveal">
+                    <h3>Contact Information</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 30px;">Reach out directly or fill the form. We'll get back to you within 24 hours.</p>
+                    
+                    <div class="info-item">
+                        <span class="icon" style="font-size: 1.5rem;">📧</span>
+                        <div>
+                            <h4>Email Us</h4>
+                            <p style="color: var(--accent);">founder@labaitechr.online</p>
+                        </div>
+                    </div>
+                    <div class="info-item" style="margin-top: 20px;">
+                        <span class="icon" style="font-size: 1.5rem;">📍</span>
+                        <div>
+                            <h4>Headquarters</h4>
+                            <p style="color: var(--text-secondary);">Kanpur, Uttar Pradesh, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card contact-form-card reveal delay-1">
+                    <form id="contactForm" class="contact-form">
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" required placeholder="Dr. John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" required placeholder="john@clinic.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="lab">Lab / Clinic Name</label>
+                            <input type="text" id="lab" placeholder="City Pathology Center">
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" rows="4" required placeholder="How can we help your lab?"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" style="width: 100%; border:none; padding:15px; font-size:1.1rem;">Send Message</button>
+                        <div id="formSuccess" class="form-success" style="display:none; color:#27c93f; margin-top:15px; text-align:center; font-weight:600;">
+                            Message Sent Successfully! We will contact you soon.
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Lab<span>AI</span>Techr</div>
+            <p>&copy; 2026 LabAITechr. All rights reserved.</p>
+            <div style="margin-top: 15px;">
+                <a href="index.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">Home</a>
+                <a href="about.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">About</a>
+                <a href="features.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">Features</a>
+                <a href="contact.html" style="color:var(--text-secondary); text-decoration:none;">Contact</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -16,11 +16,12 @@
     
     <nav class="navbar">
         <div class="container nav-container">
-            <div class="logo">Lab<span>AI</span>Techr</div>
+            <a href="index.html" class="logo" style="text-decoration:none; color:inherit;">Lab<span>AI</span>Techr</a>
             <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#features">Features</a></li>
-                <li><a href="#contact" class="btn-primary">Contact Us</a></li>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="contact.html" class="btn-primary">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -31,8 +32,8 @@
             <h1 class="hero-title">Automating Pathology<br>with <span class="text-gradient">Artificial Intelligence</span></h1>
             <p class="hero-subtitle">We build smart Python scripts and AI tools that instantly parse raw blood test reports to eliminate manual fatigue and accelerate clinical verification.</p>
             <div class="hero-buttons">
-                <a href="#features" class="btn-primary btn-large">Explore Features</a>
-                <a href="https://github.com/archraj46/Smart-LabReport-Analyzer" target="_blank" class="btn-secondary btn-large">View on GitHub</a>
+                <a href="features.html" class="btn-primary btn-large">Explore Features</a>
+                <a href="contact.html" class="btn-secondary btn-large">Partner With Us</a>
             </div>
         </div>
         <div class="hero-image reveal delay-1">
@@ -60,62 +61,14 @@ results = analyzer.scan(data)
         </div>
     </header>
 
-    <section id="about" class="section">
+    <section class="section bg-dark">
         <div class="container">
             <div class="section-header reveal">
-                <h2 class="section-title">The Problem We're Fixing</h2>
-                <p class="section-desc">Lab technicians spend hours manually verifying hundreds of data points every single day. It's slow, tiring, and prone to human error.</p>
+                <h2 class="section-title">Trusted by Modern Diagnostics</h2>
+                <p class="section-desc">Building the future of pathology data automation.</p>
             </div>
-            <div class="about-grid">
-                <div class="glass-card about-card reveal">
-                    <div class="icon">🔬</div>
-                    <h3>Built by Medical Pros</h3>
-                    <p>We are pathology experts who understand the daily grind of diagnostic labs. We build tools that actually solve real clinical problems.</p>
-                </div>
-                <div class="glass-card about-card reveal delay-1">
-                    <div class="icon">⚡</div>
-                    <h3>Powered by AI</h3>
-                    <p>Leveraging Kiro Pro+ and advanced language models to accurately parse, understand, and categorize complex medical CSV data in seconds.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="features" class="section bg-dark">
-        <div class="container">
-            <div class="section-header reveal">
-                <h2 class="section-title">Smart Lab Report Analyzer</h2>
-                <p class="section-desc">Our flagship open-source tool designed to make result verification effortless.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-item reveal">
-                    <div class="feature-content">
-                        <h3>Automatic Abnormal Flagging</h3>
-                        <p>Reads raw CBC data and instantly highlights values outside the standard medical reference ranges, catching critical issues immediately.</p>
-                    </div>
-                </div>
-                <div class="feature-item reveal">
-                    <div class="feature-content">
-                        <h3>Zero-Click Data Entry</h3>
-                        <p>Eliminate typos and transcription errors. Our scripts ingest raw machine outputs directly, ensuring 100% data integrity.</p>
-                    </div>
-                </div>
-                <div class="feature-item reveal">
-                    <div class="feature-content">
-                        <h3>Lightning Fast Verification</h3>
-                        <p>What used to take 5 minutes per patient report now takes milliseconds, allowing labs to process higher volumes without fatigue.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="section cta-section">
-        <div class="container reveal">
-            <div class="glass-card cta-card">
-                <h2>Ready to Modernize Your Lab?</h2>
-                <p>We are actively looking for partner clinics to beta test our cloud-based AI solutions.</p>
-                <a href="mailto:founder@labaitechr.online" class="btn-primary btn-large">Email Us: founder@labaitechr.online</a>
+            <div class="about-grid" style="text-align: center; margin-top: 40px;">
+                 <a href="about.html" class="btn-secondary btn-large">Read Our Story</a>
             </div>
         </div>
     </section>
@@ -124,6 +77,12 @@ results = analyzer.scan(data)
         <div class="container footer-content">
             <div class="logo">Lab<span>AI</span>Techr</div>
             <p>&copy; 2026 LabAITechr. All rights reserved.</p>
+            <div style="margin-top: 15px;">
+                <a href="index.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">Home</a>
+                <a href="about.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">About</a>
+                <a href="features.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">Features</a>
+                <a href="contact.html" style="color:var(--text-secondary); text-decoration:none;">Contact</a>
+            </div>
         </div>
     </footer>
 
