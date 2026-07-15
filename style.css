@@ -459,3 +459,70 @@ footer {
     border-color: var(--accent);
 }
 
+/* Patient AI Explainer Styles */
+.ai-explainer-container {
+    padding: 50px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.upload-zone {
+    border: 2px dashed var(--glass-border);
+    border-radius: 12px;
+    padding: 60px 20px;
+    text-align: center;
+    background: rgba(0,0,0,0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--accent);
+    background: rgba(0, 210, 255, 0.05);
+}
+.upload-icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+.loading-state {
+    text-align: center;
+    padding: 40px;
+}
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid rgba(0, 210, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: var(--accent);
+    animation: spin 1s ease-in-out infinite;
+    margin: 0 auto 20px;
+}
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.result-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 30px;
+}
+.tts-btn {
+    background: linear-gradient(135deg, #ff9900, #ff5e00);
+    box-shadow: 0 4px 15px rgba(255, 153, 0, 0.3);
+}
+.tts-btn:hover {
+    box-shadow: 0 6px 20px rgba(255, 153, 0, 0.4);
+}
+.tts-btn.playing {
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+

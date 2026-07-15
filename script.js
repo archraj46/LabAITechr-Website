@@ -61,3 +61,97 @@ if(contactForm) {
         }, 1500);
     });
 }
+
+// Patient AI Explainer Handler
+const uploadZone = document.getElementById('uploadZone');
+const browseBtn = document.getElementById('browseBtn');
+const fileInput = document.getElementById('fileInput');
+const loadingState = document.getElementById('loadingState');
+const resultState = document.getElementById('resultState');
+const resetBtn = document.getElementById('resetBtn');
+const ttsBtn = document.getElementById('ttsBtn');
+
+if(uploadZone && fileInput) {
+    // Handle click to browse
+    uploadZone.addEventListener('click', (e) => {
+        if(e.target !== browseBtn) fileInput.click();
+    });
+    browseBtn.addEventListener('click', () => fileInput.click());
+
+    // Drag and drop effects
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, preventDefaults, false);
+    });
+    function preventDefaults (e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    ['dragenter', 'dragover'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, () => uploadZone.classList.add('dragover'), false);
+    });
+    ['dragleave', 'drop'].forEach(eventName => {
+        uploadZone.addEventListener(eventName, () => uploadZone.classList.remove('dragover'), false);
+    });
+
+    // Handle file selection/drop
+    uploadZone.addEventListener('drop', (e) => {
+        let dt = e.dataTransfer;
+        let files = dt.files;
+        handleFiles(files);
+    });
+    fileInput.addEventListener('change', function() {
+        handleFiles(this.files);
+    });
+
+    function handleFiles(files) {
+        if(files.length > 0) {
+            // Fake upload and analysis process
+            uploadZone.style.display = 'none';
+            loadingState.style.display = 'block';
+            
+            // Wait 3 seconds then show results
+            setTimeout(() => {
+                loadingState.style.display = 'none';
+                resultState.style.display = 'block';
+            }, 3000);
+        }
+    }
+
+    // Reset button
+    resetBtn.addEventListener('click', () => {
+        resultState.style.display = 'none';
+        uploadZone.style.display = 'block';
+        fileInput.value = '';
+        window.speechSynthesis.cancel(); // Stop TTS if playing
+        ttsBtn.innerText = "🔊 Bolkar Sunao (Listen)";
+        ttsBtn.classList.remove('playing');
+    });
+
+    // Text to Speech
+    let isPlaying = false;
+    ttsBtn.addEventListener('click', () => {
+        if(isPlaying) {
+            window.speechSynthesis.cancel();
+            isPlaying = false;
+            ttsBtn.innerText = "🔊 Bolkar Sunao (Listen)";
+            ttsBtn.classList.remove('playing');
+            return;
+        }
+
+        const textToRead = document.getElementById('hindiText').innerText;
+        const utterance = new SpeechSynthesisUtterance(textToRead);
+        utterance.lang = 'hi-IN'; // Hindi
+        utterance.rate = 0.9; // Slightly slower for clarity
+        
+        utterance.onend = () => {
+            isPlaying = false;
+            ttsBtn.innerText = "🔊 Bolkar Sunao (Listen)";
+            ttsBtn.classList.remove('playing');
+        };
+
+        window.speechSynthesis.speak(utterance);
+        isPlaying = true;
+        ttsBtn.innerText = "⏸️ Stop Listening";
+        ttsBtn.classList.add('playing');
+    });
+}

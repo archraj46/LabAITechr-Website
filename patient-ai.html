@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient AI Explainer | LabAITechr</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="blob-bg"></div>
+    <div class="blob-bg blob-2"></div>
+    
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="index.html" class="logo" style="text-decoration:none; color:inherit;">Lab<span>AI</span>Techr</a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="features.html">Features</a></li>
+                <li><a href="patient-ai.html" class="active">Patient AI <span style="background:var(--accent); color:white; font-size:0.6rem; padding:2px 6px; border-radius:10px; margin-left:5px; vertical-align:middle;">NEW</span></a></li>
+                <li><a href="contact.html" class="btn-primary">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="page-header reveal">
+        <div class="container">
+            <h1 class="hero-title">Patient <span class="text-gradient">AI Explainer</span></h1>
+            <p class="hero-subtitle">Upload your raw blood test report and our AI will explain it to you in simple Hindi, just like a child.</p>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="glass-card ai-explainer-container reveal delay-1">
+                
+                <!-- Upload Area -->
+                <div class="upload-zone" id="uploadZone">
+                    <div class="upload-icon">📄</div>
+                    <h3>Drag & Drop your Lab Report here</h3>
+                    <p>Supports PDF, PNG, JPG (Max 5MB)</p>
+                    <button class="btn-primary" style="margin-top: 15px;" id="browseBtn">Browse Files</button>
+                    <input type="file" id="fileInput" style="display: none;" accept=".pdf, image/*">
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-state" id="loadingState" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Claude 3.5 Sonnet is analyzing your report...</p>
+                </div>
+
+                <!-- Result Area -->
+                <div class="result-state" id="resultState" style="display: none;">
+                    <div class="result-header">
+                        <h3><span class="dot green"></span> AI Explanation Ready</h3>
+                        <button class="btn-primary tts-btn" id="ttsBtn">
+                            🔊 Bolkar Sunao (Listen)
+                        </button>
+                    </div>
+                    <div class="result-card">
+                        <p id="hindiText" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-primary);">
+                            नमस्ते! मैंने आपकी ब्लड रिपोर्ट पढ़ ली है। चिंता की कोई बात नहीं है, बस एक छोटी सी चीज़ है:<br><br>
+                            आपकी रिपोर्ट में <strong>हीमोग्लोबिन (Hemoglobin)</strong> थोड़ा कम है। नॉर्मल 12 से 15 होना चाहिए, लेकिन आपका 10 है। इसका मतलब है कि आपके शरीर में खून की थोड़ी कमी है, जिसकी वजह से आपको जल्दी थकान महसूस हो सकती है या सुस्ती लग सकती है。<br><br>
+                            <strong>आपको क्या करना चाहिए?</strong><br>
+                            आप अपनी डाइट में आयरन वाली चीजें बढ़ाएं। जैसे पालक, चुकंदर (Beetroot), अनार, और सेब खाएं। अगर थकान ज्यादा हो, तो अपने डॉक्टर से मिलकर कोई आयरन की गोली ले सकते हैं। बाकी सब कुछ एकदम नॉर्मल है!
+                        </p>
+                    </div>
+                    <button class="btn-secondary" style="margin-top: 20px; width: 100%;" id="resetBtn">Analyze Another Report</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="logo">Lab<span>AI</span>Techr</div>
+            <p>&copy; 2026 LabAITechr. All rights reserved.</p>
+            <div style="margin-top: 15px; margin-bottom: 15px;">
+                <a href="index.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">Home</a>
+                <a href="about.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">About</a>
+                <a href="features.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">Features</a>
+                <a href="patient-ai.html" style="color:var(--text-secondary); margin-right:15px; text-decoration:none;">Patient AI</a>
+                <a href="contact.html" style="color:var(--text-secondary); text-decoration:none;">Contact</a>
+            </div>
+            <div style="font-size: 0.85rem;">
+                <a href="#" style="color:var(--text-secondary); margin-right:15px; text-decoration:none; opacity: 0.7;">Privacy Policy</a>
+                <a href="#" style="color:var(--text-secondary); text-decoration:none; opacity: 0.7;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
