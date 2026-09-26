@@ -39,7 +39,7 @@ export default {
 
       // 4. Send to Google Gemini API
       const apiKey = env.GEMINI_API_KEY; // SECRET KEY
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`;
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
 
       const promptText = "You are a friendly medical AI assistant. Read this uploaded pathology/blood test report and explain it to the patient in very simple, easy-to-understand Hindi (using standard Hindi script). Speak warmly like a family member. Highlight what the test is, if anything is abnormal, what it means, and give general dietary/lifestyle advice if applicable. DO NOT cause panic. End by reminding them to consult their doctor for proper medical advice. Format your response cleanly using HTML tags like <strong> and <br> for readability on a webpage.";
 

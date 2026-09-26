@@ -118,7 +118,14 @@ if(uploadZone && fileInput) {
                     body: formData
                 });
 
-                if (!response.ok) throw new Error("Failed to process report");
+                if (!response.ok) {
+                    let errText = "Failed to process report";
+                    try {
+                        const errJson = await response.json();
+                        errText = errJson.error || errText;
+                    } catch(e) {}
+                    throw new Error(errText);
+                }
 
                 const data = await response.json();
                 
@@ -128,7 +135,7 @@ if(uploadZone && fileInput) {
                 loadingState.style.display = 'none';
                 resultState.style.display = 'block';
             } catch (error) {
-                alert("Error: " + error.message);
+                alert("Server Error: " + error.message);
                 loadingState.style.display = 'none';
                 uploadZone.style.display = 'block';
             }
