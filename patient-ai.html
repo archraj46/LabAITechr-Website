@@ -46,11 +46,31 @@
                 
                 <!-- Upload Area -->
                 <div class="upload-zone" id="uploadZone">
+                    <div style="background: rgba(0, 208, 156, 0.1); color: #00D09C; padding: 5px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; display: inline-block; margin-bottom: 15px;">
+                        🔒 100% Private (Zero Storage)
+                    </div>
                     <div class="upload-icon">📄</div>
                     <h3>Drag & Drop your Lab Report here</h3>
-                    <p>Supports PDF, PNG, JPG (Max 5MB)</p>
+                    <p>Supports single PDF or multiple PNG/JPG pages (Max 5MB each)</p>
                     <button class="btn-primary" style="margin-top: 15px;" id="browseBtn">Browse Files</button>
-                    <input type="file" id="fileInput" style="display: none;" accept=".pdf, image/*">
+                    <input type="file" id="fileInput" style="display: none;" accept=".pdf, image/*" multiple>
+                    
+                    <!-- Selected Files List & Analyze Button (Hidden by default) -->
+                    <div id="selectedFilesArea" style="display: none; margin-top: 20px; text-align: left; background: var(--bg-card); padding: 15px; border-radius: 8px;">
+                        <h4 style="margin: 0 0 10px 0; font-size: 0.95rem;">Selected Pages:</h4>
+                        <ul id="fileList" style="list-style: none; padding: 0; margin: 0 0 15px 0; font-size: 0.85rem; color: var(--text-secondary);"></ul>
+                        <button class="btn-primary" style="width: 100%; background: #00D09C;" id="startAnalyzeBtn">✨ Analyze Now</button>
+                    </div>
+                </div>
+
+                <!-- Premium Modal (Hidden) -->
+                <div id="premiumModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 9999; justify-content: center; align-items: center;">
+                    <div style="background: var(--bg-card); padding: 30px; border-radius: 10px; max-width: 400px; text-align: center; border: 1px solid var(--border-color);">
+                        <h3 style="color: #ff3c3c;">Daily Limit Reached</h3>
+                        <p style="color: var(--text-secondary); margin: 15px 0;">You have used your 1 free AI report analysis for today. To analyze more reports, please subscribe to our Premium Plan.</p>
+                        <a href="https://rzp.io/rzp/EGmm321" target="_blank" class="btn-primary" style="display: block; width: 100%; margin-bottom: 10px;">Upgrade to Premium</a>
+                        <button onclick="document.getElementById('premiumModal').style.display='none'" class="btn-secondary" style="width: 100%;">Close</button>
+                    </div>
                 </div>
 
                 <!-- Loading State -->

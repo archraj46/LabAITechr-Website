@@ -103,47 +103,117 @@ if(uploadZone && fileInput) {
         handleFiles(this.files);
     });
 
-    async function handleFiles(files) {
-        if(files.length > 0) {
-            uploadZone.style.display = 'none';
-            loadingState.style.display = 'block';
-            
-            const file = files[0];
-            const formData = new FormData();
+    let selectedFiles = [];
+    const selectedFilesArea = document.getElementById('selectedFilesArea');
+    const fileListUI = document.getElementById('fileList');
+    const startAnalyzeBtn = document.getElementById('startAnalyzeBtn');
+
+    function checkRateLimit() {
+        const today = new Date().toISOString().split('T')[0];
+        const lastDate = localStorage.getItem('lastAnalysisDate');
+        if (lastDate === today) {
+            document.getElementById('premiumModal').style.display = 'flex';
+            return false;
+        }
+        return true;
+    }
+
+    function renderFileList() {
+        if(!fileListUI) return;
+        fileListUI.innerHTML = '';
+        selectedFiles.forEach((f, idx) => {
+            const li = document.createElement('li');
+            li.innerHTML = `📄 ${f.name} <span style="color:#ff4444; cursor:pointer; float:right; padding-left:10px;" onclick="removeFile(${idx})">❌ Remove</span>`;
+            li.style.marginBottom = '8px';
+            li.style.padding = '8px 10px';
+            li.style.background = 'rgba(255,255,255,0.05)';
+            li.style.borderRadius = '5px';
+            li.style.border = '1px solid var(--border-color)';
+            fileListUI.appendChild(li);
+        });
+        if (selectedFiles.length > 0) {
+            selectedFilesArea.style.display = 'block';
+        } else {
+            selectedFilesArea.style.display = 'none';
+        }
+    }
+
+    // Make removeFile globally accessible for inline onclick
+    window.removeFile = function(index) {
+        selectedFiles.splice(index, 1);
+        renderFileList();
+    };
+
+    function handleFiles(files) {
+        if (!checkRateLimit()) return;
+
+        let hasPDF = false;
+        for (let i = 0; i < files.length; i++) {
+            selectedFiles.push(files[i]);
+            if (files[i].type === 'application/pdf') hasPDF = true;
+        }
+
+        renderFileList();
+
+        // If it's a PDF, auto start. Otherwise wait for manual click.
+        if (hasPDF) {
+            startAnalysis();
+        }
+    }
+
+    if(startAnalyzeBtn) {
+        startAnalyzeBtn.addEventListener('click', startAnalysis);
+    }
+
+    async function startAnalysis() {
+        if (selectedFiles.length === 0) return;
+        if (!checkRateLimit()) return;
+
+        uploadZone.style.display = 'none';
+        loadingState.style.display = 'block';
+        
+        const formData = new FormData();
+        selectedFiles.forEach(file => {
             formData.append('file', file);
+        });
 
-            try {
-                const response = await fetch('https://lab-ai-backend.cloudhostrj.workers.dev/', {
-                    method: 'POST',
-                    body: formData
-                });
+        try {
+            const response = await fetch('https://lab-ai-backend.cloudhostrj.workers.dev/', {
+                method: 'POST',
+                body: formData
+            });
 
-                if (!response.ok) {
-                    let errText = "Failed to process report";
-                    try {
-                        const errJson = await response.json();
-                        errText = errJson.error || errText;
-                    } catch(e) {}
-                    throw new Error(errText);
-                }
-
-                const data = await response.json();
-                
-                // Update the HTML with real AI response
-                document.getElementById('hindiText').innerHTML = data.result || "Sorry, couldn't analyze the report.";
-                
-                loadingState.style.display = 'none';
-                resultState.style.display = 'block';
-            } catch (error) {
-                alert("Server Error: " + error.message);
-                loadingState.style.display = 'none';
-                uploadZone.style.display = 'block';
+            if (!response.ok) {
+                let errText = "Failed to process report";
+                try {
+                    const errJson = await response.json();
+                    errText = errJson.error || errText;
+                } catch(e) {}
+                throw new Error(errText);
             }
+
+            const data = await response.json();
+            
+            // Update the HTML with real AI response
+            document.getElementById('hindiText').innerHTML = data.result || "Sorry, couldn't analyze the report.";
+            
+            // Mark usage for today (Rate Limiting)
+            const today = new Date().toISOString().split('T')[0];
+            localStorage.setItem('lastAnalysisDate', today);
+            
+            loadingState.style.display = 'none';
+            resultState.style.display = 'block';
+        } catch (error) {
+            alert("Server Error: " + error.message);
+            loadingState.style.display = 'none';
+            uploadZone.style.display = 'block';
         }
     }
 
     // Reset button
     resetBtn.addEventListener('click', () => {
+        selectedFiles = [];
+        renderFileList();
         resultState.style.display = 'none';
         uploadZone.style.display = 'block';
         fileInput.value = '';
