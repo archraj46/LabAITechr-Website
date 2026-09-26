@@ -103,17 +103,35 @@ if(uploadZone && fileInput) {
         handleFiles(this.files);
     });
 
-    function handleFiles(files) {
+    async function handleFiles(files) {
         if(files.length > 0) {
-            // Fake upload and analysis process
             uploadZone.style.display = 'none';
             loadingState.style.display = 'block';
             
-            // Wait 3 seconds then show results
-            setTimeout(() => {
+            const file = files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const response = await fetch('https://lab-ai-backend.cloudhostrj.workers.dev/', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!response.ok) throw new Error("Failed to process report");
+
+                const data = await response.json();
+                
+                // Update the HTML with real AI response
+                document.getElementById('hindiText').innerHTML = data.result || "Sorry, couldn't analyze the report.";
+                
                 loadingState.style.display = 'none';
                 resultState.style.display = 'block';
-            }, 3000);
+            } catch (error) {
+                alert("Error: " + error.message);
+                loadingState.style.display = 'none';
+                uploadZone.style.display = 'block';
+            }
         }
     }
 
