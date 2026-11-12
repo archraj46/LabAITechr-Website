@@ -250,3 +250,30 @@ if(uploadZone && fileInput) {
         ttsBtn.classList.add('playing');
     });
 }
+
+
+// Smart Payment Modal Logic
+function openPayModal(e) {
+    if(e) e.preventDefault();
+    const modal = document.getElementById('payModal');
+    if(modal) modal.classList.add('show');
+}
+
+function closePayModal() {
+    const modal = document.getElementById('payModal');
+    if(modal) modal.classList.remove('show');
+}
+
+// Bind all pay buttons to open modal
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.trigger-pay-modal').forEach(btn => {
+        btn.addEventListener('click', openPayModal);
+    });
+
+    const modal = document.getElementById('payModal');
+    if(modal) {
+        modal.addEventListener('click', (e) => {
+            if(e.target === modal) closePayModal();
+        });
+    }
+});

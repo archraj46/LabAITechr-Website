@@ -526,3 +526,109 @@ footer {
     100% { transform: scale(1); }
 }
 
+
+
+/* Smart Payment Modal */
+.pay-modal-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(8px);
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.pay-modal-backdrop.show {
+    display: flex;
+}
+.pay-modal-box {
+    background: #0f172a;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    max-width: 460px;
+    width: 100%;
+    padding: 32px 28px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    position: relative;
+    text-align: center;
+    animation: modalPop 0.25s ease-out;
+}
+@keyframes modalPop {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+.pay-modal-close {
+    position: absolute;
+    top: 18px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.08);
+    border: none;
+    color: #94a3b8;
+    font-size: 1.4rem;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+.pay-modal-close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #fff;
+}
+.pay-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 24px;
+}
+.pay-option-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1.5px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    text-decoration: none;
+    color: #fff;
+    transition: all 0.2s;
+}
+.pay-option-card:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.07);
+}
+.pay-option-card.rzp:hover {
+    border-color: #0c83fe;
+    box-shadow: 0 6px 20px rgba(12, 131, 254, 0.25);
+}
+.pay-option-card.cf:hover {
+    border-color: #10b981;
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.25);
+}
+.pay-option-info {
+    text-align: left;
+}
+.pay-option-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.pay-option-desc {
+    font-size: 0.82rem;
+    color: #94a3b8;
+}
+.pay-option-arrow {
+    font-size: 1.4rem;
+    color: #94a3b8;
+}
