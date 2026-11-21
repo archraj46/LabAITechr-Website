@@ -15,7 +15,7 @@
             justify-content: center;
             gap: 12px;
             width: 100%;
-            padding: 16px;
+            padding: 15px;
             border-radius: 12px;
             font-size: 1.05rem;
             font-weight: 700;
@@ -56,6 +56,24 @@
             background: #334155;
             color: #fff;
         }
+        .info-input-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .info-input {
+            flex: 1;
+            padding: 10px 14px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 0.92rem;
+            outline: none;
+        }
+        .info-input:focus {
+            border-color: #38bdf8;
+        }
     </style>
 </head>
 <body>
@@ -91,15 +109,21 @@
                 
                 <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); padding: 25px; border-radius: 16px; text-align: left; margin-bottom: 25px;">
                     <h4 style="color: var(--accent); margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
-                        ⚡ Action Required: 1-Click Support Activation
+                        ⚡ 1-Click Priority Support Activation
                     </h4>
-                    <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.5;">
-                        To activate your 1-Year Priority Technical Support & Multi-PC setup warranty, please send a quick confirmation using any method below:
+                    <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 15px; line-height: 1.5;">
+                        To activate your priority support, please confirm your license receipt. You can also customize your sign-off details below:
                     </p>
+
+                    <!-- Auto-populated or Editable Name & Phone -->
+                    <div class="info-input-box">
+                        <input type="text" id="custName" class="info-input" placeholder="Your Full Name" oninput="updateLinks()">
+                        <input type="text" id="custPhone" class="info-input" placeholder="Your Phone Number" oninput="updateLinks()">
+                    </div>
 
                     <!-- Option 1: Direct Web Gmail (Desktop Browser Best Choice) -->
                     <a id="gmailWebBtn" href="#" target="_blank" class="confirm-btn btn-gmail">
-                        🔴 1-Click Send via Web Gmail (in Browser)
+                        🔴 1-Click Send via Web Gmail
                     </a>
 
                     <!-- Option 2: Default Mail App (Outlook / Phone App) -->
@@ -112,13 +136,12 @@
                         💬 1-Click Confirm via WhatsApp (+91 7007567744)
                     </a>
 
-                    <!-- Option 4: Manual Copy-Paste Backup -->
+                    <!-- Message Preview & Copy -->
                     <div style="background: #0f172a; border-radius: 10px; padding: 14px; margin-top: 15px; border: 1px dashed rgba(255,255,255,0.15);">
                         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
-                            <span style="font-size:0.8rem; color:#94a3b8;">Manual Copy (To: founder@labaitechr.online)</span>
+                            <span style="font-size:0.8rem; color:#94a3b8;">Email Message Preview (To: founder@labaitechr.online)</span>
                         </div>
-                        <p id="msgText" style="margin: 0; color: #cbd5e1; font-size: 0.85rem; font-style: italic;">
-                            "I confirm that I have received the software license and I am fully satisfied with the LabAITechr service."
+                        <p id="msgPreview" style="margin: 0; color: #cbd5e1; font-size: 0.85rem; font-style: italic; white-space: pre-line;">
                         </p>
                         <button id="copyBtn" class="btn-copy" onclick="copyConfirmMsg()">📋 Copy Text to Clipboard</button>
                     </div>
@@ -137,27 +160,54 @@
     </footer>
 
     <script>
-        const message = "I confirm that I have received the software license and I am fully satisfied with the LabAITechr service.";
-        const subject = "Software License Receipt & Service Confirmation - LabAITechr";
         const emailTo = "founder@labaitechr.online";
         const whatsappNumber = "917007567744";
+        const subject = "Software License Receipt & Service Confirmation - LabAITechr";
 
-        // 1. Direct Web Gmail in Chrome/Edge/Firefox Tab
-        const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailTo)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-        document.getElementById('gmailWebBtn').setAttribute('href', gmailWebUrl);
+        // Read URL Parameters from Cashfree / Razorpay redirect
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlName = urlParams.get('name') || urlParams.get('customer_name') || urlParams.get('payer_name') || '';
+        const urlPhone = urlParams.get('phone') || urlParams.get('customer_phone') || urlParams.get('contact') || '';
 
-        // 2. Default System Mail Client (Outlook / Windows Mail)
-        const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-        document.getElementById('emailAppBtn').setAttribute('href', mailtoLink);
+        const nameInput = document.getElementById('custName');
+        const phoneInput = document.getElementById('custPhone');
 
-        // 3. WhatsApp (Web on PC or App on Phone)
-        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
-        document.getElementById('whatsappConfirmBtn').setAttribute('href', whatsappLink);
+        if(urlName) nameInput.value = urlName;
+        if(urlPhone) phoneInput.value = urlPhone;
 
-        // 4. Copy fallback function
+        function getFullMessage() {
+            let baseMsg = "I confirm that I have received the software license and I am fully satisfied with the LabAITechr service.\n\nThanks and regards,";
+            const name = nameInput.value.trim();
+            const phone = phoneInput.value.trim();
+
+            if (name) baseMsg += `\n${name}`;
+            if (phone) baseMsg += `\n${phone}`;
+            if (!name && !phone) baseMsg += `\n[Customer Signature]`;
+
+            return baseMsg;
+        }
+
+        function updateLinks() {
+            const fullMsg = getFullMessage();
+            document.getElementById('msgPreview').innerText = `"${fullMsg}"`;
+
+            // 1. Direct Web Gmail in Chrome/Edge Tab
+            const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailTo)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullMsg)}`;
+            document.getElementById('gmailWebBtn').setAttribute('href', gmailWebUrl);
+
+            // 2. Default System Mail Client (Outlook / Windows Mail)
+            const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(fullMsg)}`;
+            document.getElementById('emailAppBtn').setAttribute('href', mailtoLink);
+
+            // 3. WhatsApp (Web on PC or App on Phone)
+            const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(fullMsg)}`;
+            document.getElementById('whatsappConfirmBtn').setAttribute('href', whatsappLink);
+        }
+
         function copyConfirmMsg() {
+            const fullMsg = getFullMessage();
             const btn = document.getElementById('copyBtn');
-            navigator.clipboard.writeText(message).then(() => {
+            navigator.clipboard.writeText(fullMsg).then(() => {
                 const old = btn.innerText;
                 btn.innerText = "✅ Copied to Clipboard!";
                 btn.style.background = "#059669";
@@ -167,6 +217,9 @@
                 }, 2500);
             });
         }
+
+        // Initialize on page load
+        updateLinks();
     </script>
 </body>
 </html>
