@@ -8,6 +8,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .confirm-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-decoration: none;
+            color: #fff;
+            margin-bottom: 14px;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .confirm-btn:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+        }
+        .btn-email-confirm {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+        }
+        .btn-whatsapp-confirm {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+    </style>
 </head>
 <body>
     <div class="blob-bg"></div>
@@ -35,31 +63,37 @@
 
     <section class="section" style="padding-top: 0;">
         <div class="container">
-            <div class="glass-card" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 40px;">
+            <div class="glass-card" style="max-width: 620px; margin: 0 auto; text-align: center; padding: 40px 30px;">
                 
-                <div style="font-size: 4rem; margin-bottom: 20px;">✅</div>
-                <h3 style="margin-bottom: 20px;">Your Software License is Ready!</h3>
+                <div style="font-size: 3.8rem; margin-bottom: 15px;">✅</div>
+                <h3 style="margin-bottom: 15px; font-size: 1.5rem;">Your Software License is Active!</h3>
                 
-                <div style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-color); padding: 20px; border-radius: 10px; text-align: left;">
-                    <h4 style="color: var(--accent); margin-top: 0;">⚠️ Action Required to Activate Support:</h4>
-                    <p style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 15px;">To finalize your account setup and activate your premium support, please confirm your satisfaction.</p>
-                    
-                    <ol style="color: var(--text-secondary); font-size: 0.95rem; padding-left: 20px; margin-bottom: 20px; line-height: 1.6;">
-                        <li>Open the email receipt you just received from Razorpay.</li>
-                        <li>Click <strong>"Reply"</strong> to that email.</li>
-                        <li>Copy and paste the exact message below and hit send:</li>
-                    </ol>
+                <div style="background: rgba(255,255,255,0.04); border: 1px solid var(--border-color); padding: 25px; border-radius: 16px; text-align: left; margin-bottom: 25px;">
+                    <h4 style="color: var(--accent); margin-top: 0; font-size: 1.1rem; display: flex; align-items: center; gap: 8px;">
+                        ⚡ Action Required: 1-Click Support Activation
+                    </h4>
+                    <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.5;">
+                        To activate your 1-Year Priority Technical Support & Multi-PC setup warranty, please confirm receipt of your software license below:
+                    </p>
 
-                    <div style="background: #111; border-radius: 5px; padding: 15px; position: relative; margin-bottom: 20px;">
-                        <p id="confirmMessage" style="margin: 0; color: #fff; font-size: 0.95rem; font-style: italic;">"I confirm that I have received the software license and I am fully satisfied with the LabAITechr service."</p>
+                    <!-- Direct Email Button -->
+                    <a id="emailConfirmBtn" href="#" class="confirm-btn btn-email-confirm">
+                        📧 1-Click Email Confirmation to Founder
+                    </a>
+
+                    <!-- Direct WhatsApp Button -->
+                    <a id="whatsappConfirmBtn" href="#" target="_blank" class="confirm-btn btn-whatsapp-confirm">
+                        💬 1-Click WhatsApp Confirmation (+91 7007567744)
+                    </a>
+
+                    <div style="background: #111; border-radius: 8px; padding: 12px; margin-top: 15px; border: 1px dashed rgba(255,255,255,0.15);">
+                        <p style="margin: 0; color: #cbd5e1; font-size: 0.85rem; font-style: italic;">
+                            "I confirm that I have received the software license and I am fully satisfied with the LabAITechr service."
+                        </p>
                     </div>
-
-                    <button class="btn-primary" id="copyBtn" style="width: 100%; display: flex; justify-content: center; align-items: center; gap: 10px;">
-                        📋 Copy Message to Clipboard
-                    </button>
                 </div>
 
-                <a href="index.html" class="btn-secondary" style="display: inline-block; margin-top: 30px;">Return to Homepage</a>
+                <a href="index.html" class="btn-secondary" style="display: inline-block; padding: 10px 24px; border-radius: 8px;">Return to Homepage</a>
             </div>
         </div>
     </section>
@@ -72,18 +106,18 @@
     </footer>
 
     <script>
-        document.getElementById('copyBtn').addEventListener('click', function() {
-            const textToCopy = document.getElementById('confirmMessage').innerText.replace(/"/g, '');
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const originalText = this.innerHTML;
-                this.innerHTML = "✅ Copied Successfully!";
-                this.style.background = "#00D09C";
-                setTimeout(() => {
-                    this.innerHTML = originalText;
-                    this.style.background = "";
-                }, 3000);
-            });
-        });
+        const message = "I confirm that I have received the software license and I am fully satisfied with the LabAITechr service.";
+        const subject = "Software License Receipt & Service Confirmation - LabAITechr";
+        const emailTo = "founder@labaitechr.online";
+        const whatsappNumber = "917007567744";
+
+        // Setup 1-Click Mailto Link
+        const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        document.getElementById('emailConfirmBtn').setAttribute('href', mailtoLink);
+
+        // Setup 1-Click WhatsApp Link
+        const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+        document.getElementById('whatsappConfirmBtn').setAttribute('href', whatsappLink);
     </script>
 </body>
 </html>
