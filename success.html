@@ -21,19 +21,40 @@
             font-weight: 700;
             text-decoration: none;
             color: #fff;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
             transition: all 0.2s ease;
             box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border: none;
+            cursor: pointer;
         }
         .confirm-btn:hover {
             transform: translateY(-2px);
             filter: brightness(1.1);
         }
-        .btn-email-confirm {
+        .btn-gmail {
+            background: linear-gradient(135deg, #ea4335, #c5221f);
+        }
+        .btn-email-app {
             background: linear-gradient(135deg, #0284c7, #2563eb);
         }
         .btn-whatsapp-confirm {
             background: linear-gradient(135deg, #25D366, #128C7E);
+        }
+        .btn-copy {
+            background: #1e293b;
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #e2e8f0;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-top: 10px;
+        }
+        .btn-copy:hover {
+            background: #334155;
+            color: #fff;
         }
     </style>
 </head>
@@ -73,23 +94,33 @@
                         ⚡ Action Required: 1-Click Support Activation
                     </h4>
                     <p style="color: var(--text-secondary); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.5;">
-                        To activate your 1-Year Priority Technical Support & Multi-PC setup warranty, please confirm receipt of your software license below:
+                        To activate your 1-Year Priority Technical Support & Multi-PC setup warranty, please send a quick confirmation using any method below:
                     </p>
 
-                    <!-- Direct Email Button -->
-                    <a id="emailConfirmBtn" href="#" class="confirm-btn btn-email-confirm">
-                        📧 1-Click Email Confirmation to Founder
+                    <!-- Option 1: Direct Web Gmail (Desktop Browser Best Choice) -->
+                    <a id="gmailWebBtn" href="#" target="_blank" class="confirm-btn btn-gmail">
+                        🔴 1-Click Send via Web Gmail (in Browser)
                     </a>
 
-                    <!-- Direct WhatsApp Button -->
+                    <!-- Option 2: Default Mail App (Outlook / Phone App) -->
+                    <a id="emailAppBtn" href="#" class="confirm-btn btn-email-app">
+                        📧 Open in Default Mail App (Outlook / Phone)
+                    </a>
+
+                    <!-- Option 3: WhatsApp Web / App -->
                     <a id="whatsappConfirmBtn" href="#" target="_blank" class="confirm-btn btn-whatsapp-confirm">
-                        💬 1-Click WhatsApp Confirmation (+91 7007567744)
+                        💬 1-Click Confirm via WhatsApp (+91 7007567744)
                     </a>
 
-                    <div style="background: #111; border-radius: 8px; padding: 12px; margin-top: 15px; border: 1px dashed rgba(255,255,255,0.15);">
-                        <p style="margin: 0; color: #cbd5e1; font-size: 0.85rem; font-style: italic;">
+                    <!-- Option 4: Manual Copy-Paste Backup -->
+                    <div style="background: #0f172a; border-radius: 10px; padding: 14px; margin-top: 15px; border: 1px dashed rgba(255,255,255,0.15);">
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                            <span style="font-size:0.8rem; color:#94a3b8;">Manual Copy (To: founder@labaitechr.online)</span>
+                        </div>
+                        <p id="msgText" style="margin: 0; color: #cbd5e1; font-size: 0.85rem; font-style: italic;">
                             "I confirm that I have received the software license and I am fully satisfied with the LabAITechr service."
                         </p>
+                        <button id="copyBtn" class="btn-copy" onclick="copyConfirmMsg()">📋 Copy Text to Clipboard</button>
                     </div>
                 </div>
 
@@ -111,13 +142,31 @@
         const emailTo = "founder@labaitechr.online";
         const whatsappNumber = "917007567744";
 
-        // Setup 1-Click Mailto Link
-        const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
-        document.getElementById('emailConfirmBtn').setAttribute('href', mailtoLink);
+        // 1. Direct Web Gmail in Chrome/Edge/Firefox Tab
+        const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(emailTo)}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        document.getElementById('gmailWebBtn').setAttribute('href', gmailWebUrl);
 
-        // Setup 1-Click WhatsApp Link
+        // 2. Default System Mail Client (Outlook / Windows Mail)
+        const mailtoLink = `mailto:${emailTo}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(message)}`;
+        document.getElementById('emailAppBtn').setAttribute('href', mailtoLink);
+
+        // 3. WhatsApp (Web on PC or App on Phone)
         const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
         document.getElementById('whatsappConfirmBtn').setAttribute('href', whatsappLink);
+
+        // 4. Copy fallback function
+        function copyConfirmMsg() {
+            const btn = document.getElementById('copyBtn');
+            navigator.clipboard.writeText(message).then(() => {
+                const old = btn.innerText;
+                btn.innerText = "✅ Copied to Clipboard!";
+                btn.style.background = "#059669";
+                setTimeout(() => {
+                    btn.innerText = old;
+                    btn.style.background = "";
+                }, 2500);
+            });
+        }
     </script>
 </body>
 </html>
